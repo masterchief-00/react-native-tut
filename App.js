@@ -1,34 +1,31 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 export default function App() {
-  const [name, setName] = useState("Shaun");
-  const [age, setAge] = useState(30);
-
-  const clickHandler = () => {
-    setPerson({
-      name: "luigi",
-      age: 45,
-    });
-  };
+  const [people, setPeople] = useState([
+    { name: "Shaun", key: "1" },
+    { name: "Yoshi", key: "2" },
+    { name: "Mario", key: "3" },
+    { name: "Luigi", key: "4" },
+    { name: "Peach", key: "5" },
+    { name: "Toad", key: "6" },
+    { name: "Parker", key: "7" },
+    { name: "Ryan", key: "8" },
+    { name: "Jim", key: "9" },
+    { name: "Jack", key: "10" },
+  ]);
 
   return (
     <View style={styles.container}>
-      <Text>Enter Name:</Text>
-      <TextInput
-        placeholder="e.g. John Doe"
-        onChangeText={(val) => setName(val)}
-        style={styles.input}
-      />
-      <TextInput
-      keyboardType="numeric"
-        placeholder="e.g. 99"
-        onChangeText={(val) => setAge(val)}
-        style={styles.input}
-      />
-      <Text>
-        Name: {name}, age: {age}
-      </Text>
+      <ScrollView>
+        {people.map((item) => {
+          return (
+            <View key={item.key}>
+              <Text style={styles.item}>{item.name}</Text>
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 }
@@ -37,8 +34,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 40,
+    paddingHorizontal: 20,
+    // alignItems: "center",
+    // justifyContent: "center",
   },
   input: {
     borderWidth: 1,
@@ -47,5 +46,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 10,
     width: 200,
+  },
+  item: {
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: "pink",
+    fontSize: 24,
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 8,
   },
 });
